@@ -163,6 +163,9 @@ x6 = 513
 y6 = 10
 x7 = 48
 y7 = -80
+space_playing = 0
+music.set_volume(0.2)
+music.play("uptown dancing")
 
 for i in range(8):
     ladder = Actor("tile_0071", (x4, y4))
@@ -1423,6 +1426,7 @@ def draw_UI():
         
     elif char.hp >= 0:
         mode = -1
+        music.stop()
     
     
     
@@ -2546,6 +2550,7 @@ def collisions():
     global txt_repeat
     global house
     global old_y
+    global space_playing
 
 
 
@@ -2571,11 +2576,26 @@ def collisions():
         char.x = 540
         char.y = 210
     if char.x >= 539 and level == 1:
+
+
+        if house1.hp == 0 or house2.hp == 0 or house3.hp == 0:
+
+
+            music.stop()
+            music.set_volume(0.2)
+            music.play("tanks go to battle")
+            space_playing = 0
+
+
         level = 2
         char.x = 5
         char.y = 265
         bg_img = 1
     if char.x <= 2 and level == 2:
+        if space_playing == 0:
+            music.stop()
+            music.set_volume(0.5)
+            music.play("space date")
         lever.x = 25
         lever.y = 138
         level = 1
@@ -2583,11 +2603,24 @@ def collisions():
         char.y = 210
         bg_img = 0
     if char.x >= 540 and level == 2:
+        if space_playing == 0:
+            music.stop()
+            music.set_volume(0.5)
+            music.play("space date")
         level = 3
         char.x = 5
         char.y = 265
         bg_img = 2
     if char.x <= 0 and level == 3:
+        if house1.hp == 0 or house2.hp == 0 or house3.hp == 0:
+
+
+            music.stop()
+            music.set_volume(0.2)
+            music.play("tanks go to battle")
+            space_playing = 0
+
+        
         level = 2
         char.x = 530
         char.y = 265
@@ -2952,6 +2985,10 @@ def collisions():
         sign_show1 = 0
         txt_repeat = 0
         mode = 11
+        if space_playing == 0:
+            space_playing = 1
+            music.set_volume(0.5)
+            music.play("space date")
         
         
 
@@ -3384,12 +3421,15 @@ def on_mouse_down(button, pos):
     global col1
     global right, img, anim, old_y, x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7
     global txt_repeat
-
+    global space_playing
     if mode == -2 and start.collidepoint(pos):
         mode = 0
+        music.set_volume(0.5)
+        music.play("space date")
 
     if mode == -1 and yes_b.collidepoint(pos):
-
+        music.set_volume(0.5)
+        music.play("space date")
         bg_img = 0
         char.x = 200
         char.y = 265
@@ -3429,6 +3469,7 @@ def on_mouse_down(button, pos):
 
 
     elif mode == -1 and no_b.collidepoint(pos) or mode == -3 and yes_b.collidepoint(pos):
+        space_playing = 0
         char.x = 200
         char.y = 265
         txt_repeat = 0
@@ -3451,7 +3492,7 @@ def on_mouse_down(button, pos):
         bird.y = -100
         b_press.image = "tile_0148"
 
-        mode = 0
+        mode = -2
         key = 0
         jump = 0
         right = 0
@@ -3487,6 +3528,8 @@ def on_mouse_down(button, pos):
         npc.image = "city-npc_st2"
         key1.x = 235
         key1.y = 35
+        music.set_volume(0.2)
+        music.play("uptown dancing")
 
 
 
