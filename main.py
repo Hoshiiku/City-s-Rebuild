@@ -2,7 +2,6 @@ import pgzrun
 from pgzhelper import *
 import random 
 import os
-#hi
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 nightfilter = Actor("night_filter")
 bg = Actor("bg")
