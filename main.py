@@ -2,6 +2,7 @@ import pgzrun
 from pgzhelper import *
 import random 
 import os
+
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 nightfilter = Actor("night_filter")
 bg = Actor("bg")
@@ -144,6 +145,7 @@ gren3 = 0
 gren4 = 0
 col1 = 0
 txt_repeat = 0
+
 
 
 x = 520
@@ -450,7 +452,9 @@ world7_map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 
               [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ]]
 
 
-              
+
+
+
 def draw_level():
     if level == 0:
         for i in range(len(world1_map)):
@@ -3302,6 +3306,7 @@ def on_key_down(key):
 
     
     if keyboard.w and jump == 0:
+
         
         jump_speed -= 16
         jump = 1
