@@ -1,4 +1,5 @@
 import pgzrun
+from pgzero import clock
 from pgzhelper import *
 import random 
 import os
@@ -298,7 +299,6 @@ for i in range(2):
     
     
     
-    
 world1_map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
               [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ], 
               [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ], 
@@ -450,7 +450,6 @@ world7_map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 
               [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25 ,25 ,25 ,1 ,1 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ],
               [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ],
               [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ,25 ]]
-
 
 
 
@@ -1856,7 +1855,10 @@ def draw():
 
    
     
-    
+def sound():
+    global jump_sound
+    jump_sound = sounds.jumpsound
+    jump_sound.set_volume(0.25)
             
         
 def controls():
@@ -2598,7 +2600,7 @@ def collisions():
     if char.x <= 2 and level == 2:
         if space_playing == 0:
             music.stop()
-            music.set_volume(0.5)
+            music.set_volume(1.5)
             music.play("space date")
         lever.x = 25
         lever.y = 138
@@ -2609,7 +2611,7 @@ def collisions():
     if char.x >= 540 and level == 2:
         if space_playing == 0:
             music.stop()
-            music.set_volume(0.5)
+            music.set_volume(1.5)
             music.play("space date")
         level = 3
         char.x = 5
@@ -2991,7 +2993,7 @@ def collisions():
         mode = 11
         if space_playing == 0:
             space_playing = 1
-            music.set_volume(0.5)
+            music.set_volume(1.5)
             music.play("space date")
         
         
@@ -3287,8 +3289,8 @@ def update(dt):
     controls()
     collisions()
     animations()
-    
-   
+    sound()
+
     
 
 
@@ -3302,6 +3304,7 @@ def on_key_down(key):
     global old_y
     global key_repeat
     global sign_show1
+    global jump_sound
 
 
     
@@ -3310,6 +3313,7 @@ def on_key_down(key):
         
         jump_speed -= 16
         jump = 1
+        jump_sound.play()
         
     if keyboard.f and mode == 1 and level == 0:
         enter_b.y = 268
@@ -3429,11 +3433,11 @@ def on_mouse_down(button, pos):
     global space_playing
     if mode == -2 and start.collidepoint(pos):
         mode = 0
-        music.set_volume(0.5)
+        music.set_volume(1.5)
         music.play("space date")
 
     if mode == -1 and yes_b.collidepoint(pos):
-        music.set_volume(0.5)
+        music.set_volume(1.5)
         music.play("space date")
         bg_img = 0
         char.x = 200
