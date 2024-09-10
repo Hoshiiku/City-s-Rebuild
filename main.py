@@ -1863,6 +1863,7 @@ def sound():
     global door_open
     global lever_switch
     global move_rope_sound
+    global trampoline_sound
     jump_sound = sounds.jumpsound
     jump_sound.set_volume(0.2)
     jump_s1 = sounds.jump1
@@ -1879,6 +1880,7 @@ def sound():
     lever_switch.set_volume(0.85)
     move_rope_sound = sounds.move_rope
     move_rope_sound.set_volume(0.8)
+    trampoline_sound = sounds.trampoline_jump
 
 
             
@@ -2681,6 +2683,7 @@ def collisions():
         touch = 0
         
     if touch == 1  and keyboard.w:
+        trampoline_sound.play()
         jump_speed = -20 
         jump = 1
         touch = 0
@@ -3337,7 +3340,8 @@ def on_key_down(key):
     global jump_sounds_char
     
 
-    
+    if char.colliderect(lock) and d1follow == 1:
+        move_rope_sound.play()
     if keyboard.s and char.colliderect(lever) and lever.image == "tile_0066":
         lever_switch.play()
         if level == 1 or level == 5:
