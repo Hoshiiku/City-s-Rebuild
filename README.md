@@ -6,7 +6,7 @@ Made by a single developer, City's rebuild is the result of my dedication and wo
 
 Bugfixes:
 
-Fixed a bug that, when falling down and quickly moving to another level, if the girl's text was activated then, there wasn't anyway to close the dialog.
+Fixed a bug that, when falling down and quickly moving to another level, if the girl's text was activated there wasn't anyway to close the dialog.
 
 
 
