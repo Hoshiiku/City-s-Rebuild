@@ -1857,8 +1857,30 @@ def draw():
     
 def sound():
     global jump_sound
+    global jump_s1, jump_s2, jump_s3, jump_s4, jump_s5
+    global jump_sounds_char
+    global key_pickup
+    global door_open
+    global lever_switch
+    global move_rope_sound
     jump_sound = sounds.jumpsound
-    jump_sound.set_volume(0.25)
+    jump_sound.set_volume(0.2)
+    jump_s1 = sounds.jump1
+    jump_s2 = sounds.jump2
+    jump_s3 = sounds.jump3
+    jump_s4 = sounds.jump4
+    jump_s5 = sounds.jump5
+    jump_sounds_char = [jump_s1, jump_s2, jump_s3, jump_s4, jump_s5]
+    key_pickup = sounds.key_pickup
+    key_pickup.set_volume(0.85)
+    door_open = sounds.door_open
+    door_open.set_volume(0.85)
+    lever_switch = sounds.lever_switch
+    lever_switch.set_volume(0.85)
+    move_rope_sound = sounds.move_rope
+    move_rope_sound.set_volume(0.8)
+
+
             
         
 def controls():
@@ -2633,6 +2655,9 @@ def collisions():
         bg_img = 1
         
     if char.colliderect(door_cl) and level == 1 and key == 1 or char.colliderect(door_cl) and level == 1 and open_d1 == 1:
+        if door_cl.image == "door_cl":
+            door_open.play()
+
         door_cl.x =  63
         door_cl.image = "door_op"
         open_d1 = 1
@@ -2727,6 +2752,7 @@ def collisions():
         if box_list1[i].colliderect(char) and level == 1:
             char.x = 495
     if char.colliderect(npc) and sign_show1 == 1 and level == 2 and house1.hp == 0 and house2.hp == 0 and house3.hp == 0:
+        char.y = 265
         char.x = 450
         sign_show1 = 0
         mode = 7
@@ -3156,6 +3182,7 @@ def animations():
         my_house2.image = "window_animation1"
     
     if lever_on1 == 1: 
+        
         lever_on1 = 0
         if lever.image == "tile_0066":
             lever.image = "tile_0065"
@@ -3167,6 +3194,7 @@ def animations():
             
             
     if move_rope == 1:
+         
         for i in range(len(rope_list1)):
             if rope_list1[i].y >= 0:
                 rope_list1[i].y -= 5
@@ -3179,6 +3207,7 @@ def animations():
             else:
                 box_list1.pop(i)
                 break
+        
 
     for i in range(len(smoke_list1)):
         if level == 2 and house1.hp == 0:
@@ -3305,14 +3334,20 @@ def on_key_down(key):
     global key_repeat
     global sign_show1
     global jump_sound
-
+    global jump_sounds_char
+    
 
     
+    if keyboard.s and char.colliderect(lever) and lever.image == "tile_0066":
+        lever_switch.play()
+        if level == 1 or level == 5:
+            move_rope_sound.play()
     if keyboard.w and jump == 0:
-
-        
+        current_jump = random.choice(jump_sounds_char)
+        current_jump.set_volume(0.9)
         jump_speed -= 16
         jump = 1
+        current_jump.play()
         jump_sound.play()
         
     if keyboard.f and mode == 1 and level == 0:
@@ -3346,6 +3381,7 @@ def on_key_down(key):
         enter_b.y = 268
         animate(enter_b, tween = "bounce_end", duration = 0.5, y =270)
         mode = 0
+        key_pickup.play()
         key_repeat = "no"
     elif keyboard.f and mode == 6 and level == 1 and key_repeat == "yes":
         enter_b.y = 268
