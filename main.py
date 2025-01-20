@@ -201,26 +201,7 @@ for i in range(2):
 for i in range(40):
     raindrop = Actor("raindrop", (random.randint(0, 540), random.randint(-700, 0)))
     raindrop_list.append(raindrop)
-    
-for i in range(10):
-    sparkle = Actor("sparkle1", (random.randint(0, 540), random.randint(0, 300)))
-    sparkle_img = random.randint(1, 7)
-    if sparkle_img == 2:
-        sparkle.image = "sparkle2"
-    elif sparkle_img == 3:
-        sparkle.image = "sparkle3"
-    elif sparkle_img == 4:
-        sparkle.image = "sparkle4"
-    elif sparkle_img == 5:
-        sparkle.image = "sparkle5"
-    elif sparkle_img == 6:
-        sparkle.image = "sparkle6"
-    elif sparkle_img == 7:
-        sparkle.image = "sparkle7"
-        
-        
-    
-    sparkle_list.append(sparkle)
+
     
 for i in range(12):
     cloud_x = random.randint(600, 1200)
@@ -257,7 +238,7 @@ for i in range(3):
     
     
 for i in range(10):
-    smoke = Actor("smoke", (random.randint(20,130), random.randint(50, 265)))
+    smoke = Actor("smoke", (random.randint(20,130), random.randint(50, 265)))   
     smoke_list1.append(smoke)
     
     
@@ -3287,24 +3268,10 @@ def animations():
         ex_sign.y = 212
     elif ex_sign.y == 212:
         ex_sign.y = 215
-    for i in range(len(sparkle_list)):
-        if sparkle_list[i].image == "sparkle1":
-            sparkle_list[i].image = "sparkle2"
-        elif sparkle_list[i].image == "sparkle2":
-            sparkle_list[i].image = "sparkle3"
-        elif sparkle_list[i].image == "sparkle3":
-            sparkle_list[i].image = "sparkle4"
-        elif sparkle_list[i].image == "sparkle4":
-            sparkle_list[i].image = "sparkle5"
-        elif sparkle_list[i].image == "sparkle5":
-            sparkle_list[i].image = "sparkle6"
-        elif sparkle_list[i].image == "sparkle6":
-            sparkle_list[i].image = "sparkle7"
-        elif sparkle_list[i].image == "sparkle7":
-            sparkle_list[i].image = "sparkle1"
+    
             
     for i in range(len(raindrop_list)):
-        raindrop_list[i].y += 12
+        raindrop_list[i].y += 8
         if raindrop_list[i].y >= 550:
             raindrop_list[i].x = random.randint(0, 540)
             raindrop_list[i].y = random.randint(-300, 0)
